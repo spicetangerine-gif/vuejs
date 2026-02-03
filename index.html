@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1></h1>
+      <input type="text" />
+    </div>
+  </body>
+  <script>
+    let message = "메세지를 입력해주세요!";
+    const h1Tag = document.querySelector("div > h1");
+    h1Tag.textContent = message;
+
+    const inputTag = document.querySelector("div > input");
+    inputTag.value = message;
+
+    inputTag.addEventListener("input", function (event) {
+      h1Tag.textContent = event.currentTarget.value;
+    });
+  </script>
+</html>
