@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from "vue";
-const items = ref(["예약하기", "자료 조사"]);
-let newItem = ref("");
+const memoList = ref(["예약하기", "자료 조사"]);
+let newMemo = ref("");
 
-const addItem = () => {
-  items.value.push(newItem.value);
-  newItem.value = "";
+const addMemo = () => {
+  memoList.value.push(newMemo.value);
+  newMemo.value = "";
 };
 
 // [미션 1] 반응형 데이터 만들기
@@ -15,6 +15,18 @@ const addItem = () => {
 // [미션 2] 함수 만들기
 // 1. 메모 추가 함수: 배열에 추가하고 입력창 비우기
 // 2. 메모 삭제 함수: Hint, splice 메소드 사용
+// Array.splice(시작위치, 삭제갯수, 추가데이터);
+// => memoList : ["예약하기", "자료 조사"];
+// 1) 중간에 값 추가
+// memoList.splice(1, 0, '운동가기');
+// 2) 맨 첫번째 데이터 변경
+// memoList.splice(0, 1, '약속 참석');
+// 3) 맨 첫번재 데이터 삭제
+// memoList.splice(0,1);
+
+const delMemo = (index) => {
+  memoList.value.splice(index, 1);
+};
 </script>
 
 <template>
@@ -22,15 +34,15 @@ const addItem = () => {
     <h1>My Simple Memo</h1>
 
     <div class="input-container">
-      <input type="text" v-model="newItem" placeholder="메모를 입력하세요" />
+      <input type="text" v-model="newMemo" placeholder="메모를 입력하세요" />
 
-      <button type="button" @click="addItem">등록</button>
+      <button type="button" v-on:click="addMemo">등록</button>
     </div>
 
     <ul class="memo-list">
-      <li v-for="item in items">
-        <span>{{ `${item}` }}</span>
-        <button class="del-btn">삭제</button>
+      <li v-for="(memo, index) in memoList">
+        <span>{{ `${memo}` }}</span>
+        <button class="del-btn" v-on:click="delMemo(index)">삭제</button>
       </li>
     </ul>
   </div>
