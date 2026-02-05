@@ -16,6 +16,11 @@ const router = createRouter({
     {
       path: "/OneComp",
       name: "OneComponent",
+      component: () => import("../views/OneComponentApp.vue"),
+    },
+    {
+      path: "/MultiComp",
+      name: "MultiComponent",
       component: () => import("../views/MultiComponentApp.vue"),
     },
   ],
