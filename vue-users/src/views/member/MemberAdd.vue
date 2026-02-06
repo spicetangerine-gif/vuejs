@@ -1,7 +1,7 @@
 <!-- views/member/MemberDetail.vue -->
 <script setup>
-import { RouterLink, useRoute } from "vue-router";
-const router = useRoute(); // vue-router 자체를 호출
+import { RouterLink, useRouter } from "vue-router";
+const router = useRouter(); // vue-router 자체를 호출
 const member = ref({
   id: "",
   name: "",
