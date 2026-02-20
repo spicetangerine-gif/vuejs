@@ -9,17 +9,16 @@ const member = ref({
   phone: "",
 }); // 회원정보
 const server = "https://jsonplaceholder.typicode.com";
+
+import { useMemberStore } from "@/stores/member";
+const memberStore = useMemberStore();
+
 const addMember = async () => {
-  let info = await fetch(`${server}/users`, {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(member.value),
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
-  let newId = info.id;
+  // 서버에 등록
+  let newId = await memberStore.createMember(member.value);
+
+  // 컴포넌트 전환 : 페이지 전환
+
   router.push({ name: "memberDetail", params: { id: newId } });
   //router.go(-1);
 };

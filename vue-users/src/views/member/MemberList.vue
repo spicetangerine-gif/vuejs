@@ -6,17 +6,15 @@ const goToDetail = (memberId) => {
   router.push({ name: "memberDetail", params: { id: memberId } });
 };
 import { onBeforeMount, ref } from "vue";
-const members = ref([]);
 
-const server = "https://jsonplaceholder.typicode.com";
-const findMemberList = async () => {
-  const list = await fetch(`${server}/users`)
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+// 사용하고자 하는 저장소 정의
+import { useMemberStore } from "@/stores/member";
+import { storeToRefs } from "pinia";
 
-  //console.log(list);
-  members.value = list;
-};
+const memberStore = useMemberStore();
+
+const { members } = storeToRefs(memberStore);
+const { findMemberList } = memberStore;
 
 // Lifecycle Hook 중 가장 먼저 실행
 // Lifecycle Hook은 마지막에 작성
